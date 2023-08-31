@@ -12,7 +12,6 @@ class BaseScreen extends StatefulWidget {
 }
 
 class _BaseScreenState extends State<BaseScreen> {
-
   int currentIndex = 0;
   final pageController = PageController();
 
@@ -34,9 +33,11 @@ class _BaseScreenState extends State<BaseScreen> {
         onTap: (index) {
           setState(() {
             currentIndex = index;
-            pageController.jumpToPage(index);
+            // pageController.jumpToPage(index);
+            pageController.animateToPage(index,
+                duration: const Duration(milliseconds: 700),
+                curve: Curves.ease);
           });
-          
         },
         type: BottomNavigationBarType.fixed,
         backgroundColor: Colors.green,
@@ -44,22 +45,12 @@ class _BaseScreenState extends State<BaseScreen> {
         unselectedItemColor: Colors.white.withAlpha(100),
         items: const [
           BottomNavigationBarItem(
-            icon: Icon(Icons.home_outlined),
-            label: 'Home'
-          ),
+              icon: Icon(Icons.home_outlined), label: 'Home'),
           BottomNavigationBarItem(
-            icon: Icon(Icons.shopping_cart_outlined),
-            label: 'Carrinho'
-          ),
+              icon: Icon(Icons.shopping_cart_outlined), label: 'Carrinho'),
+          BottomNavigationBarItem(icon: Icon(Icons.list), label: 'Pedidos'),
           BottomNavigationBarItem(
-            icon: Icon(Icons.list),
-            label: 'Pedidos'
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person_outlined),
-            label: 'Perfil'
-          ),
-
+              icon: Icon(Icons.person_outlined), label: 'Perfil'),
         ],
       ),
     );
